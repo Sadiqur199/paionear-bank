@@ -39,28 +39,32 @@ const depositeNumber = getInputNumber('depositAmount')
 
 updateSpanText('currentDeposit',depositeNumber);
 updateSpanText('currentBalance',depositeNumber);
-
-const withDrawBtn = document.getElementById('addWithdraw');
-withDrawBtn.addEventListener('click',function(){
-const withDrawNumber = getInputNumber('withDrawAmaount');
-console.log(withDrawNumber);
-
-})
-
 document.getElementById('depositAmount').value = '';
 })
 
 //withDraw event Handelar
+
+const withdrawBtn = document.getElementById('addWithdraw');
+withdrawBtn.addEventListener('click',function(){
+const withdrawNumber = getInputNumber('withdrawAmount');
+
+updateSpanText('currentWithdraw',withdrawNumber);
+updateSpanText('currentBalance', -1*withdrawNumber);
+
+document.getElementById('withdrawAmount').value = '';
+})
+
+// withdraw event function
 function getInputNumber(id){
   const amount = document.getElementById(id).value;
   const amountNumber = parseFloat(amount);
   return amountNumber;
 }
 
-//add deposit and balance
-function updateSpanText(id,depositeNumber){
+//add deposit and balance function
+function updateSpanText(id,addedNumber){
   const currentBalance =  document.getElementById(id).innerText;
  const currentBalanceNumber = parseFloat(currentBalance);
- const totalBalance = currentBalanceNumber + depositeNumber ;
+ const totalBalance = currentBalanceNumber + addedNumber ;
  document.getElementById(id).innerText = totalBalance;
 }
